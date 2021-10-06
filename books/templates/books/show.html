@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <title>{{title}}</title>
+  </head>
+  <body>
+      <div class="container">
+          <div class="row">
+
+            <h3 class="text-center mt-2 mb-2">{{book.title}}</h3>
+            <div class="d-flex">
+                <img style="height: 200px;" class="" src="{{book.thumbnailUrl}}" /> 
+                <p class="ms-2" style="text-align: justify;">{{book.longDescription}}</p>
+            </div>
+            <p class="d-flex">
+                <span>Authors: {{book.authors|join:', '}}</span>
+            </p>
+            
+
+
+          </div>
+      </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
+  </body>
+</html>
