@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+
+  {% if messages %}
+      {% for msg in messages %}      
+          <div class="alert alert-{{msg.level_tag}}" role="alert">
+          {{msg.message}}
+          </div>
+      {% endfor %}            
+  {% endif %}
+
+
+  <h3 class="text-center mt-2 mb-2">{{book.title}}</h3>
+  <div class="d-flex">
+      <img style="height: 200px;" class="" src="{{book.image.url}}" /> 
+      <p class="ms-2" style="text-align: justify;">{{book.longDescription}}</p>
+  </div>
+  <p class="d-flex mt-2">
+      <!-- <span>Authors: {{book.authors|join:', '}}</span> -->
+      <span class="mt-1">Authors:
+          {% if authors %}
+              {% for author in authors %}      
+                  <a href="{% url 'author.books' author %}" class="me-1">{{ author }}</a>
+              {% endfor %}          
+          {% endif %}
+      </span>
+      <p>Created at: {{book.created_at}}</p>
+  </p>
+
+  <div class="" style="width: 70%;">
+    {% if user.is_authenticated %}
+      <form action="{% url 'book.review'  %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Comment</label>
+          <input type="hidden" name="book_id" value="{{book.id}}"/>  
+          <textarea name="comment" class="form-control" style="height:100px;" placeholder="Write Review"></textarea>
+          <input type="file" name="review_image" class='form-control mt-2' />
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    {% else %}
+
+        <p>
+            <a href="{% url 'login' %}?next={{request.path}}">Login</a> to write review.
+        </p>
+    
+    {% endif %}
+      {% if reviews %}
+      <h5 class="mt-5 mb-2">Previous Reviews</h5>
+        <div class="mb-2">
+          {% for item in reviews %}
+            <div class="d-flex"> 
+                {% if item.image %}
+                  <img src="{{item.image}}" style="height:50px; width:50px;" class="mb-2" />
+                {% else %}
+                  <img src="/media/no_photo.png" style="height:50px; width:50px;" class="mb-2" />
+                {% endif %}
+
+                <div class="ms-2">
+                  <p class="text-secondary mb-0"><b>{{item.user}}</b> at {{item.created_at}}</p>  
+                  <p>{{ item.comment }}</p> 
+                </div>
+            </div>
+            
+          {% endfor %}
+        </div>            
+      {% endif %}
+
+
+  </div>
+</div>
+
+{% endblock %}
