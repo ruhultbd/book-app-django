@@ -74,6 +74,7 @@ def review(request):
 
     return redirect('/books/'+book_id)
 
+
 def author(request, author):
 
     books = Book.objects.filter(authors__name=author)
