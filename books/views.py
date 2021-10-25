@@ -57,7 +57,6 @@ def show(request, id):
     return render(request, 'books/show.html', data)
 
 def review(request):
-
     if request.user.is_authenticated: 
         comment = request.POST['comment']
         book_id = request.POST['book_id']
@@ -74,7 +73,6 @@ def review(request):
         messages.add_message(request, messages.SUCCESS, 'Successfully submitted')
 
     return redirect('/books/'+book_id)
-
 
 def author(request, author):
 
